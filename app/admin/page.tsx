@@ -1,10 +1,9 @@
 import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/auth';
 import { Users, Ticket, FileText, BarChart3, Shield } from 'lucide-react';
 
 export default async function AdminDashboard() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect('/login');

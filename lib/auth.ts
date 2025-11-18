@@ -1,4 +1,4 @@
-import { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { db } from './db';
@@ -23,14 +23,7 @@ declare module 'next-auth' {
   }
 }
 
-declare module 'next-auth/jwt' {
-  interface JWT {
-    id: number;
-    role: 'user' | 'employee' | 'admin';
-  }
-}
-
-export const authOptions: NextAuthOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -40,7 +33,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Please provide email and password');
+          return null;
         }
 
         const [user] = await db
@@ -50,7 +43,7 @@ export const authOptions: NextAuthOptions = {
           .limit(1);
 
         if (!user || !user.isActive) {
-          throw new Error('Invalid credentials');
+          return null;
         }
 
         const isPasswordValid = await bcrypt.compare(
@@ -59,7 +52,7 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isPasswordValid) {
-          throw new Error('Invalid credentials');
+          return null;
         }
 
         return {
@@ -81,19 +74,18 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id;
-        session.user.role = token.role;
+        session.user.id = token.id as number;
+        session.user.role = token.role as 'user' | 'employee' | 'admin';
       }
       return session;
     },
   },
   pages: {
     signIn: '/login',
-    error: '/login',
   },
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET || 'your-secret-key-change-in-production',
-};
+});

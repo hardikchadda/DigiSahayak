@@ -1,11 +1,10 @@
 import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/auth';
 import Link from 'next/link';
 import { FileText, Ticket, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect('/login');
