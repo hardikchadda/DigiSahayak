@@ -26,6 +26,7 @@ CREATE TABLE `schemes` (
 	FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+<<<<<<< HEAD
 CREATE UNIQUE INDEX `schemes_slug_unique` ON `schemes` (`slug`);--> statement-breakpoint
 CREATE TABLE `users` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -49,3 +50,6 @@ CREATE TABLE `tickets` (
 	`updated_at` integer NOT NULL,
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
+=======
+CREATE UNIQUE INDEX `schemes_slug_unique` ON `schemes` (`slug`);
+>>>>>>> 0c3ca3a312480db61ae58ed577a338f170a2ce8f

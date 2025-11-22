@@ -159,6 +159,7 @@ Users can install DigiSahayak as a mobile app:
 2. Tap "Add to Home Screen"
 3. Use like a native app
 
+<<<<<<< HEAD
 ## 🔐 Authentication & Role-Based Access
 
 ### Login Flow
@@ -253,6 +254,11 @@ Then restart the development server.
 - [ ] Password hashing with bcrypt
 - [ ] Database-backed user management (Drizzle ORM)
 - [ ] Email verification
+=======
+## 🔮 Future Enhancements
+
+- [ ] User authentication
+>>>>>>> 0c3ca3a312480db61ae58ed577a338f170a2ce8f
 - [ ] Bookmark favorite schemes
 - [ ] Application tracking
 - [ ] Push notifications for new schemes
@@ -260,9 +266,12 @@ Then restart the development server.
 - [ ] Voice search
 - [ ] Scheme eligibility calculator
 - [ ] PDF downloads of scheme details
+<<<<<<< HEAD
 - [ ] Admin dashboard for user management
 - [ ] Email notifications for ticket updates
 - [ ] JWT tokens instead of simple tokens
+=======
+>>>>>>> 0c3ca3a312480db61ae58ed577a338f170a2ce8f
 
 ## 📄 License
 

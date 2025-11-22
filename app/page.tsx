@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { db } from '@/lib/db';
 import { categories } from '@/lib/db/schema';
 import SearchBar from '@/components/ui/SearchBar';
+<<<<<<< HEAD
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -25,6 +26,10 @@ export default async function Home() {
     redirect('/admin/dashboard');
   }
 
+=======
+
+export default async function Home() {
+>>>>>>> 0c3ca3a312480db61ae58ed577a338f170a2ce8f
   const allCategories = await db.select().from(categories);
 
   return (
